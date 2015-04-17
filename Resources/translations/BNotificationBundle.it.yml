@@ -1,0 +1,5 @@
+howlongago:
+    more_than_seven_days: %date% alle %time%
+    in_the_last_seven_days: %date% alle %time%
+    yesterday: Ieri alle %time%
+    today: Oggi alle %time%

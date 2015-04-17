@@ -1,0 +1,27 @@
+FryDry\NotificationBundle\Entity\Notification:
+    type: entity
+    table: frydry_notifications
+    repositoryClass: FryDry\NotificationBundle\Entity\Repository\NotificationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        entityClassName:
+            type: string
+            length: 255
+            column: entity_class_name
+        entityId:
+            type: string
+            length: 255
+            column: entity_id
+        createdAt:
+            type: datetime
+            column: created_at
+        read:
+            type: boolean
+            column: `read`
+    lifecycleCallbacks:
+        prePersist: [ setDefaults ]

@@ -1,0 +1,31 @@
+parameters:
+    twig_extension_params:
+        notification_get_url : %frydry_notification.notification_get_url%
+        notification_get_list_by_channel_url : %frydry_notification.notification_get_list_by_channel_url%
+
+services:
+    frydry_notification.notifiable_object_listener:
+        class: FryDry\NotificationBundle\EventListener\NotifiableObjectListener
+        arguments: [%frydry_notification.notification_class%]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+    frydry_notification.notification_relationship_subscriber:
+        class: FryDry\NotificationBundle\EventListener\NotificationRelationshipSubscriber
+        arguments: [%frydry_notification.notification_class%, %frydry_notification.user_class%]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    frydry_notification.thumb_generator:
+        class: FryDry\NotificationBundle\Model\ThumbGenerator
+        arguments: [ { kernel.root_dir : %kernel.root_dir%, thumb_cache_dir : %frydry_notification.notification_list.thumb.cache_dir%, thumb_default_width : %frydry_notification.notification_list.thumb.width% } ]
+
+    frydry_notification.twig.extension:
+        class: FryDry\NotificationBundle\Twig\Extension\FryDryNotificationExtension
+        arguments: [@router, %twig_extension_params%]
+        tags:
+            - { name: twig.extension }
+
+    frydry_notification.notification_manager_default:
+        class: FryDry\NotificationBundle\Model\NotificationManager
+        arguments: [ @router, @translator, @frydry_notification.thumb_generator, %frydry_notification.entities% ]

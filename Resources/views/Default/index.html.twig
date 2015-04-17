@@ -1,0 +1,8 @@
+Hello {{ name }}!
+{#{{ notification_check_loop() }}#}
+{% javascripts
+'@FryDryNotificationBundle/Resources/public/js/vendor/jquery/jquery-1.11.2.min.js'
+'@FryDryNotificationBundle/Resources/public/js/notification-manager.js'
+'@FryDryNotificationBundle/Resources/public/js/main.js' output="js/compiled/frydry.main.js" %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}

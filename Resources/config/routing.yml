@@ -1,0 +1,5 @@
+frydry_notification_notification:
+    resource: "@FryDryNotificationBundle/Resources/config/routing/notification.yml"
+frydry_notification_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FryDryNotificationBundle:Default:index }
