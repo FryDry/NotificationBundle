@@ -51,7 +51,7 @@ class NotifiableObjectListener {
 		$this->entity = $args->getEntity();
 		$this->em = $args->getEntityManager();
 
-		if ($this->entity instanceof NotifiableObjectInterface) {
+		if ($this->entity instanceof NotifiableObjectInterface && $this->entity->getNotifier() && $this->entity->getNotificationRecipients()) {
 
 			switch (true) {
 				case $this->entity->getNotificationRecipients() instanceof Collection:
