@@ -12,7 +12,6 @@
   "require": {
     "php": ">=5.3.0",
     "symfony/framework-bundle": ">=2.3.26",
-    "symfony/intl": ">=2.6.5"
   },
   "require-dev": {
     "twig/twig": "~1.5",
