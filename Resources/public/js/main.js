@@ -1,7 +1,4 @@
-var notificationManager = new NotificationManager({
-    notificationGetUrl : $('#frydry-notification-setting').attr('data-get-url'),
-    notificationCheckInterval : 15
-});
+var notificationManager = new NotificationManager();
 
 var defaultSubscriber = {
     UIElement: $('#notifications'),
@@ -13,7 +10,14 @@ var defaultSubscriber = {
         event.preventDefault();
     },
     onListUpdate: function(list) {
+console.log(list);
         // do something with list object
+        for (item in list) {
+            html = '<li>';
+            html += '<a href="'+item.redirect_url+'">';
+
+            html += '</a>';
+        }
     }
 };
 

@@ -50,16 +50,27 @@ class FryDryNotificationExtension extends \Twig_Extension {
 	public function getFunctions()
 	{
 		return array(
-			new \Twig_SimpleFunction('notification_check_loop', array($this, 'printNotificationCheckLoopScript'), array(
+			new \Twig_SimpleFunction('notification_manager_script', array($this, 'printNotificationManagerScript'), array(
+				'is_safe' => array('html'),
+				'needs_environment' => true
+			)),
+			new \Twig_SimpleFunction('notification_manager_settings', array($this, 'printNotificationManagerSettings'), array(
 				'is_safe' => array('html'),
 				'needs_environment' => true
 			))
 		);
 	}
 
-	public function printNotificationCheckLoopScript(\Twig_Environment $twig)
+	public function printNotificationManagerScript(\Twig_Environment $twig, $options)
 	{
-		return $twig->render('FryDryNotificationBundle:Script:notification_check_loop.html.twig');
+		return $twig->render('FryDryNotificationBundle:Script:notification_manager.html.twig', array(
+			'jquery' => isset($options['jquery']) ? $options['jquery'] : false
+		));
+	}
+
+	public function printNotificationManagerSettings(\Twig_Environment $twig)
+	{
+		return $twig->render(('FryDryNotificationBundle:Settings:settings.html.twig'));
 	}
 
 

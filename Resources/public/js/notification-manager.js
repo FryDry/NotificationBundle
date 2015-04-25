@@ -3,7 +3,7 @@ NotificationManager = function(options) {
 
     var $ = jQuery;
 
-    this.notificationGetUrl = '/';
+    this.notificationGetUrl = $('#frydry-notification-setting').attr('data-get-url');
     this.notificationCheckLoop = null;
     this.notificationCheckInterval = 5;
     this.autoStart = true;
@@ -74,11 +74,10 @@ UINotificationSubscriber = function(notificationManager, params) {
     this.UIelement = params.UIElement;
     this.channel = params.channel;
 
-    if (params.updateListUrl === undefined) {
-        this.updateListUrl = this.UIelement.attr('data-update-list-url');
-    } else {
-        this.updateListUrl = params.updateListUrl;
-    }
+    this.updateListUrl = $('#frydry-notification-setting').length > 0 ? $('#frydry-notification-setting').attr('data-get-list-by-channel-url') : '/';
+    this.updateListUrl = this.UIelement.attr('data-update-list-url') !== undefined ? this.UIelement.attr('data-update-list-url') : this.updateListUrl;
+    this.updateListUrl = params.updateListUrl !== undefined ? params.updateListUrl : this.updateListUrl;
+
 
     this.onUpdate = function() {
         var callback = params.onUpdate || function(){};
@@ -139,6 +138,8 @@ UINotificationSubscriber = function(notificationManager, params) {
 
 UINotificationSubscriber.prototype = {
 
+    constructor: UINotificationSubscriber,
+
     notificationManager: null,
     UIelement: null,
     channel: 'default',
@@ -163,4 +164,4 @@ UINotificationSubscriber.prototype = {
     }
 };
 
-UINotificationSubscriber.prototype.constructor = UINotificationSubscriber;
+//UINotificationSubscriber.prototype.constructor = UINotificationSubscriber;

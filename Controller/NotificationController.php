@@ -48,21 +48,7 @@ class NotificationController extends Controller {
 			'createdAt' => 'DESC'
 		));
 
-		$body = array();
-
-		foreach ($entities as $entity) {
-			/** @var NotificationInterface $entity */
-			$item = array();
-			$item['id'] = $entity->getId();
-			$item['redirect_url'] = '';
-			$redirectRoute = $notificationManager->getRedirectUrlForEntity($entity->getEntityClassName());
-			if ($redirectRoute) {
-				$item['redirect_url'] = $this->generateUrl($redirectRoute, array('id' => $entity->getEntityId()));
-			}
-			$item['howlongago'] = $notificationManager->getHowLongAgoStringForEntity($entity);
-
-			$body[] = $item;
-		}
+		$body = $notificationManager->buildList($entities);
 
 		return new JsonResponse($body);
 

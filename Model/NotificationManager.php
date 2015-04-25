@@ -99,23 +99,34 @@ class NotificationManager {
 				$howLongAgo = $this->translator->trans('howlongago.more_than_seven_days', array(
 					'%date%' => $dateString,
 					'%time%' => $entity->getCreatedAt()->format('H.i')
-				), 'BNotificationBundle');
+				), 'FDNotification');
 				break;
 			case intval($interval->format('%a')) > 1:
 				$howLongAgo = $this->translator->trans('howlongago.in_the_last_seven_days', array(
 					'%date%' => strftime('%A', $entity->getCreatedAt()->format('U')),
 					'%time%' => $entity->getCreatedAt()->format('H.i')
-				), 'BNotificationBundle');
+				), 'FDNotification');
 				break;
 			case intval($interval->format('%a')) == 1 || (intval($interval->format('%h')) < 24 && intval($interval->format('%h') > 1) && $now->format('G') <= $entity->getCreatedAt()->format('G')):
 				$howLongAgo = $this->translator->trans('howlongago.yesterday', array(
 					'%time%' => $entity->getCreatedAt()->format('H.i')
-				), 'BNotificationBundle');
+				), 'FDNotification');
 				break;
 			case intval($interval->format('%h')) < 24 && intval($interval->format('%h') >= 1):
 				$howLongAgo = $this->translator->trans('howlongago.today', array(
 					'%time%' => $entity->getCreatedAt()->format('H.i')
-				), 'BNotificationBundle');
+				), 'FDNotification');
+				break;
+			case intval($interval->format('%h')) < 1 && intval($interval->format('%i') >= 1):
+				$howLongAgo = $this->translator->trans('howlongago.minutes', array(
+					'%minutes%' => $entity->getCreatedAt()->format('i')
+				), 'FDNotification');
+				break;
+			case intval($interval->format('%i') < 1):
+				$howLongAgo = $this->translator->trans('howlongago.now', array(), 'FDNotification');
+				break;
+			default:
+				$howLongAgo = '';
 		}
 
 		return $howLongAgo;
@@ -140,7 +151,9 @@ class NotificationManager {
 			if (array_key_exists($entity->getEntityClassName(), $this->configuredNotifiableEntities)) {
 				$notification = array(
 					'id' => $entity->getId(),
-					'redirect_url' => $this->router->generate($this->configuredNotifiableEntities[$entity->getEntityClassName()]['redirect_router_path'], array('id' => $entity->getEntityId()))
+					'redirect_url' => $this->router->generate($this->configuredNotifiableEntities[$entity->getEntityClassName()]['redirect_router_path'], array('id' => $entity->getEntityId())),
+					'howlongago' => $this->getHowLongAgoStringForEntity($entity),
+					'message' => $this->translator->trans($this->configuredNotifiableEntities[$entity->getEntityClassName()]['notification_message'], array('%user%' => $entity->getGenerator()->getName()), 'FDNotification')
 				);
 				if ($entity->getGenerator()->getProfileImage()) {
 					$thumbnail = $this->thumbGenerator->thumbnail($entity->getGenerator()->getProfileImage(), 100);

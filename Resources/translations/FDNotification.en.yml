@@ -1,0 +1,7 @@
+howlongago:
+    more_than_seven_days: %date% at %time%
+    in_the_last_seven_days: %date% at %time%
+    yesterday: Testerday at %time%
+    today: Today at %time%
+    minutes: %minutes% minutes ago
+    now: Now

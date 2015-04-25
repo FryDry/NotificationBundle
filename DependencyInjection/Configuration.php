@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('frydry_notification');
+        $rootNode = $treeBuilder->root('fry_dry_notification');
 
         $rootNode
 			->children()
@@ -56,9 +56,10 @@ class Configuration implements ConfigurationInterface
 				->useAttributeAsKey('class')
 					->prototype('array')
 						->children()
-							->scalarNode('name')->end()
+//							->scalarNode('name')->end()
 							->scalarNode('channel')->end()
 							->scalarNode('redirect_router_path')->end()
+							->scalarNode('notification_message')->isRequired()->cannotBeEmpty()->end()
 							->scalarNode('class')->end()
 						->end()
 					->end()
