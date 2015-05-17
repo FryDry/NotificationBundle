@@ -3,9 +3,9 @@ NotificationManager = function(options) {
 
     var $ = jQuery;
 
-    this.notificationGetUrl = $('#frydry-notification-setting').attr('data-get-url');
-    this.notificationCheckLoop = null;
-    this.notificationCheckInterval = 5;
+    this.url = $('#frydry-notification-setting').attr('data-get-url');
+    this.checkLoop = null;
+    this.interval = 5;
     this.autoStart = true;
     this.subscribers = [];
 
@@ -18,15 +18,15 @@ NotificationManager = function(options) {
     this.startCheckingForNotifications = function() {
         var that = this;
         this.checkForNotifications();
-        this.notificationCheckLoop = setInterval(function() { return that.checkForNotifications()}, this.notificationCheckInterval * 1000)
+        this.checkLoop = setInterval(function() { return that.checkForNotifications()}, this.interval * 1000)
     }
 
     this.stopCheckingForNotifications = function() {
-        clearInterval(this.notificationCheckLoop);
+        clearInterval(this.checkLoop);
     }
 
     this.checkForNotifications = function() {
-        var url = this.notificationGetUrl;
+        var url = this.url;
         var that = this;
         $.ajax({
             url: url,
