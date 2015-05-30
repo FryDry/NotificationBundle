@@ -55,21 +55,13 @@ class NotifiableObjectListener {
 
 			switch (true) {
 				case $this->entity->getNotificationRecipients() instanceof Collection:
-//					$that = $this;
-//					$this->entity->getNotificationRecipients()->forAll(function($recipient) use ($that) {
-//						$that->buildNotificationForRecipient($recipient);
-//					});
+				case is_array($this->entity->getNotificationRecipients()):
 					foreach ($this->entity->getNotificationRecipients() as $recipient) {
 						$this->buildNotificationForRecipient($recipient);
 					}
 					break;
 				case $this->entity->getNotificationRecipients() instanceof UserInterface:
 					$this->buildNotificationForRecipient($this->entity->getNotificationRecipients());
-					break;
-				case is_array($this->entity->getNotificationRecipients()):
-					foreach ($this->entity->getNotificationRecipients() as $recipient) {
-						$this->buildNotificationForRecipient($recipient);
-					}
 					break;
 			}
 

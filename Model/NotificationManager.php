@@ -50,11 +50,11 @@ class NotificationManager {
 		$this->translator = $translator;
 		$this->thumbGenerator = $thumbGenerator;
 		$this->configuredNotifiableEntities = $notifiableEntities;
-		$this->_initChannels();
-		$this->_initLocale();
+		$this->initChannels();
+		$this->initLocale();
 	}
 
-	protected function _initChannels() {
+	protected function initChannels() {
 		foreach ($this->configuredNotifiableEntities as $entity => $config) {
 			$this->entityChannelMap[$entity] = isset($config['channel']) && $config['channel'] ? $config['channel'] : 'default';
 			if (isset($config['channel']) && $config['channel']) {
@@ -65,10 +65,10 @@ class NotificationManager {
 		}
 	}
 
-	protected function _initLocale()
+	protected function initLocale()
 	{
 		try {
-			$l10nCode = Locale::getRegion($this->translator->getLocale());
+			Locale::getRegion($this->translator->getLocale());
 		} catch (\Exception $e) {
 			setlocale(LC_TIME, LocaleManager::$l10nCodes[$this->translator->getLocale()]);
 		}

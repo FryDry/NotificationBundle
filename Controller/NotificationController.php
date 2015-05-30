@@ -2,7 +2,6 @@
 
 namespace FryDry\NotificationBundle\Controller;
 
-use FryDry\NotificationBundle\Model\NotificationInterface;
 use FryDry\NotificationBundle\Model\NotificationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;

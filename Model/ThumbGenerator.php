@@ -9,6 +9,8 @@
 namespace FryDry\NotificationBundle\Model;
 
 
+use Symfony\Component\Config\Definition\Exception\Exception;
+
 class ThumbGenerator {
 
 	protected $options;
@@ -50,7 +52,11 @@ class ThumbGenerator {
 				mkdir($webPath . $cacheDir, 0777, true);
 			}
 
-			$imageInfo = @getimagesize($webPath . $path);
+			try {
+				$imageInfo = getimagesize($webPath . $path);
+			} catch (Exception $e) {
+				return false;
+			}
 
 			$format = 'unknown';
 			if (isset($imageInfo['mime'])) {
@@ -72,11 +78,6 @@ class ThumbGenerator {
 
 			$img_width = imagesx($image);
 			$img_height = imagesy($image);
-
-			$orientation = 'landscape';
-			if ($img_width < $img_height) {
-				$orientation = 'portrait';
-			}
 
 			$original_aspect = $img_width / $img_height;
 
