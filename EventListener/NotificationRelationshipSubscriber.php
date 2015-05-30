@@ -9,7 +9,6 @@
 namespace FryDry\NotificationBundle\EventListener;
 
 
-use FryDry\NotificationBundle\Entity\Notification;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;

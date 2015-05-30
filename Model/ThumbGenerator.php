@@ -147,7 +147,6 @@ class ThumbGenerator {
 		}
 
 		return $cacheDir . '/' . $thumbName;
-//print_r($imageInfo);
 
 	}
 
