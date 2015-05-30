@@ -8,9 +8,6 @@
 
 namespace FryDry\NotificationBundle\Model;
 
-
-use Symfony\Component\Intl\Locale;
-
 class LocaleManager {
 
 	public static $l10nCodes = array(
