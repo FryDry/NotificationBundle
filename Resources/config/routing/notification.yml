@@ -5,3 +5,4 @@ frydry_notification_get:
 frydry_notification_get_list_by_channel:
     path: /notification/get-by-channel
     defaults: { _controller: FryDryNotificationBundle:Notification:getListByChannel }
+
