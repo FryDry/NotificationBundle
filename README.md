@@ -3,7 +3,7 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/6d0df314-827f-43c6-8e39-0021cc240f43/big.png)](https://insight.sensiolabs.com/projects/6d0df314-827f-43c6-8e39-0021cc240f43)
 
 The FryDry help you to manage in app notification of your Symfony2 application.
-Please not that before installation you should have defined your Application's user class.
+Please note that before installation you should have defined your Application's user class.
 If you are using for example [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle), configure first your [User class](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/master/Resources/doc/index.md#step-3-create-your-user-class)
 
 1. [Installation](#installation)
